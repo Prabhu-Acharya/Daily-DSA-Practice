@@ -1,0 +1,55 @@
+===========================================
+        7 DAY DSA PLAN (TABLE FORMAT)
+===========================================
+
+| Day   | Basics Topic              | Practice                  | LeetCode Problems                          | Goal                          |
+|-------|--------------------------|--------------------------|--------------------------------------------|-------------------------------|
+| Day 1 | Arrays + Time Complexity | Dry run (pen-paper)      | Contains Duplicate, Missing Number         | Brute vs Optimized            |
+| Day 2 | Hashing (Map/Set)        | Frequency count          | Two Sum (revise), Valid Anagram            | O(n) optimization             |
+| Day 3 | Prefix Sum               | Subarray sum logic       | Running Sum, Subarray Sum Equals K         | Cumulative thinking           |
+| Day 4 | Two Pointers             | Sorted array practice    | Two Sum II, Remove Duplicates              | Reduce nested loops           |
+| Day 5 | Sliding Window           | Fixed window problems    | Max Avg Subarray, Longest Substring (basic)| Window movement understanding |
+| Day 6 | Strings                  | Traversal + edge cases   | Valid Palindrome, Reverse String           | String handling               |
+| Day 7 | Revision + Mixed         | Combine all concepts     | Solve 3–5 mixed easy problems              | Confidence building           |
+
+
+===========================================
+           DAILY ROUTINE
+===========================================
+
+| Time         | Task                          |
+|--------------|-------------------------------|
+| 30–45 mins   | Learn concept                 |
+| 30 mins      | Pen & paper dry run           |
+| 1–1.5 hrs    | Solve LeetCode problems       |
+| 15 mins      | Revise mistakes               |
+
+
+===========================================
+           IMPORTANT RULES
+===========================================
+- Don’t jump to solution quickly
+- Think at least 15–20 minutes
+- Write brute force first
+- Then optimize
+- Always aim for O(n)
+
+
+===========================================
+         CORE PROBLEMS LIST
+===========================================
+- Two Sum (Done)
+- Best Time to Buy & Sell Stock (Done)
+- Contains Duplicate
+- Valid Anagram
+- Move Zeroes
+- Maximum Subarray
+- Valid Palindrome
+- Remove Duplicates (Sorted Array)
+
+===========================================
+GOAL AFTER 7 DAYS:
+- Strong Array Basics
+- Hashing Clear
+- Pattern Recognition Improved
+===========================================

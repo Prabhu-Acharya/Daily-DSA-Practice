@@ -7,7 +7,7 @@
 
 
 import java.util.*;
-public class buyAndSell {
+public class BestTimeToBuySell {
     static int maxProfit(int[] prices){
         int maxProfit = 0;
         int minPrice = Integer.MAX_VALUE;
