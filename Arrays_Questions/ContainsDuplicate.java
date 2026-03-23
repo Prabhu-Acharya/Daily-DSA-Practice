@@ -12,8 +12,8 @@ public class ContainsDuplicate {
         for (int i = 0; i < nums.length; i++) {
             nums[i] = sc.nextInt();
         }
-        //boolean result = containsDuplicate(nums);
-       // System.out.println("containsDuplicate:" + result);
+        boolean result = containsDuplicate(nums);
+        System.out.println("containsDuplicate:" + result);
     }
 
     // ******************************BRUTE FORCE APPROACH
@@ -45,7 +45,15 @@ public class ContainsDuplicate {
 
     // *********************** OPTIMIZED APPROACH ***************** */
 
-    static int[] containsDuplicate(int[] nums) {
-        return nums;
+    static boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int num:nums){
+            if(set.contains(num)){
+                return true;
+            }
+            set.add(num);
+        }
+        return false;
     }
 }
