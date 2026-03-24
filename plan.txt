@@ -1,55 +1,124 @@
 ===========================================
-        7 DAY DSA PLAN (TABLE FORMAT)
+        10 DAY DSA PLAN (TABLE FORMAT)
 ===========================================
 
-| Day   | Basics Topic              | Practice                  | LeetCode Problems                          | Goal                          |
-|-------|--------------------------|--------------------------|--------------------------------------------|-------------------------------|
-| Day 1 | Arrays + Time Complexity | Dry run (pen-paper)      | Contains Duplicate, Missing Number         | Brute vs Optimized            |
-| Day 2 | Hashing (Map/Set)        | Frequency count          | Two Sum (revise), Valid Anagram            | O(n) optimization             |
-| Day 3 | Prefix Sum               | Subarray sum logic       | Running Sum, Subarray Sum Equals K         | Cumulative thinking           |
-| Day 4 | Two Pointers             | Sorted array practice    | Two Sum II, Remove Duplicates              | Reduce nested loops           |
-| Day 5 | Sliding Window           | Fixed window problems    | Max Avg Subarray, Longest Substring (basic)| Window movement understanding |
-| Day 6 | Strings                  | Traversal + edge cases   | Valid Palindrome, Reverse String           | String handling               |
-| Day 7 | Revision + Mixed         | Combine all concepts     | Solve 3–5 mixed easy problems              | Confidence building           |
+| Day  | Topic                      | Logic Building (Small Programs)            | LeetCode Problems                              | Key Focus / Thinking                |
+|------|---------------------------|-------------------------------------------|------------------------------------------------|------------------------------------|
+| 1    | Arrays + Basics           | Max-Min, Reverse Array, Sum               | Contains Duplicate, Largest Element            | Loop mastery, dry run               |
+| 2    | Hashing (Map/Set)         | Frequency Count, First Unique             | Two Sum, Valid Anagram                         | Store & reuse data (O(n))           |
+| 3    | Prefix Sum                | Running Sum, Range Sum (i→j)              | Running Sum, Subarray Sum = K                  | Cumulative thinking                 |
+| 4    | Sliding Window (Fixed)    | Max sum of size K                         | Max Sum Subarray (size K)                      | Window movement                     |
+| 5    | Sliding Window (Variable) | Longest substring without repeat          | Longest Substring Without Repeating Characters | Expand + shrink window              |
+| 6    | Strings                   | Reverse String, Palindrome                | Valid Palindrome, Longest Common Prefix        | Character traversal                 |
+| 7    | Recursion Basics          | Factorial, Fibonacci                      | Climbing Stairs, Power of Two                  | Break into subproblems              |
+| 8    | Sorting + Basics          | Bubble Sort, Selection Sort               | Sort Colors, Merge Sorted Array                | Comparison + ordering               |
+| 9    | Binary Search             | Search element, First/Last occurrence     | Binary Search, Search Insert Position          | Divide & conquer                    |
+| 10   | Revision + Mixed          | Dry run all patterns                      | Two Sum, Subarray Sum K, Sliding Window        | Pattern recognition + confidence    |
+==================== 10 DAY DSA + LEETCODE ROADMAP ====================
 
+DAY-WISE PLAN (TOPIC + LOGIC + LEETCODE)
 
-===========================================
-           DAILY ROUTINE
-===========================================
+| Day | Topic                  | Logic Building (Small Programs)            | LeetCode Problems                                                                 |
+|-----|-----------------------|-------------------------------------------|----------------------------------------------------------------------------------|
+| 1   | Arrays Basics         | Max-Min, Reverse, Sum                     | Contains Duplicate, Max Element, Move Zeroes, Best Time to Buy Sell Stock, Find Min |
+| 2   | Hashing               | Frequency Count, First Unique             | Two Sum, Valid Anagram, Intersection of Arrays, First Unique Character, Happy Number |
+| 3   | Prefix Sum            | Running Sum, Range Sum                    | Running Sum, Subarray Sum = K, Range Sum Query, Pivot Index, Continuous Subarray Sum |
+| 4   | Sliding Window Fixed  | Max sum of size K                         | Max Sum Subarray Size K, Avg Subarray, Max Vowels, Diet Plan Performance, Grumpy Bookstore |
+| 5   | Sliding Window Var    | Longest substring logic                   | Longest Substring Without Repeat, Min Size Subarray Sum, Fruit Into Baskets, Permutation in String, Longest Repeating Character Replacement |
+| 6   | Strings               | Reverse String, Palindrome                | Valid Palindrome, Longest Common Prefix, Reverse Words, String Compression, Valid Parentheses |
+| 7   | Recursion             | Factorial, Fibonacci                      | Climbing Stairs, Power of Two, Fibonacci, Subsets, Generate Parentheses |
+| 8   | Sorting               | Bubble Sort, Selection Sort               | Sort Colors, Merge Sorted Array, Majority Element, Kth Largest Element, Relative Sort Array |
+| 9   | Binary Search         | Basic search, first/last occurrence       | Binary Search, Search Insert Position, First Bad Version, Peak Element, Sqrt(x) |
+| 10  | Mixed Revision        | Dry run all patterns                      | Two Sum, Subarray Sum K, Longest Substring, Binary Search, Sort Colors |
 
-| Time         | Task                          |
-|--------------|-------------------------------|
-| 30–45 mins   | Learn concept                 |
-| 30 mins      | Pen & paper dry run           |
-| 1–1.5 hrs    | Solve LeetCode problems       |
-| 15 mins      | Revise mistakes               |
+======================================================================
 
+==================== DAILY STUDY STRUCTURE ====================
 
-===========================================
-           IMPORTANT RULES
-===========================================
-- Don’t jump to solution quickly
-- Think at least 15–20 minutes
-- Write brute force first
+1. Concept Learning        -> 30 minutes
+2. Logic Building         -> 30 minutes
+3. LeetCode Practice      -> 1–2 hours
+4. Dry Run (Pen-Paper)    -> 20 minutes
+
+======================================================================
+
+==================== HOW TO SOLVE EACH PROBLEM ====================
+
+Step 1: Dry Run First
+- Take sample input
+- Solve manually
+
+Step 2: Brute Force
+- Think simplest solution
+
+Step 3: Optimize
+Ask:
+- Can I use HashMap?
+- Can I use Prefix Sum?
+- Can I use Sliding Window?
+
+Step 4: Code
+- Write clean code
+- Proper naming
+
+Step 5: Pattern Note
+Write after solving:
+Pattern used:
+Mistake made:
+
+======================================================================
+
+==================== DAILY TRACKING SHEET ====================
+
+Day:
+Problems Solved:
+Problems Stuck:
+Pattern Learned:
+Confidence (1-10):
+
+======================================================================
+
+==================== IMPORTANT PATTERNS ====================
+
+1. Hashing:
+- Fast lookup
+- Store values for reuse
+
+2. Prefix Sum:
+- Subarray problems
+- cumulative sums
+
+3. Sliding Window:
+- Continuous range problems
+- optimize nested loops
+
+4. Binary Search:
+- Sorted arrays
+- divide and conquer
+
+======================================================================
+
+==================== GOLDEN RULES ====================
+
+DO:
+- Dry run every problem
+- Start with brute force
 - Then optimize
-- Always aim for O(n)
+- Revise daily
 
+DON’T:
+- Jump to solution
+- Skip basics
+- Do too many problems fast
 
-===========================================
-         CORE PROBLEMS LIST
-===========================================
-- Two Sum (Done)
-- Best Time to Buy & Sell Stock (Done)
-- Contains Duplicate
-- Valid Anagram
-- Move Zeroes
-- Maximum Subarray
-- Valid Palindrome
-- Remove Duplicates (Sorted Array)
+======================================================================
 
-===========================================
-GOAL AFTER 7 DAYS:
-- Strong Array Basics
-- Hashing Clear
-- Pattern Recognition Improved
-===========================================
+==================== END GOAL ====================
+
+After 10 days:
+- Strong basics
+- Pattern recognition
+- Ready for medium problems
+- Confidence in interviews
+
+======================================================================
