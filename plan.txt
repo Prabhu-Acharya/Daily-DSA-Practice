@@ -18,7 +18,7 @@
 
 DAY-WISE PLAN (TOPIC + LOGIC + LEETCODE)
 
-| Day | Topic                  | Logic Building (Small Programs)            | LeetCode Problems                                                                 |
+| Day | Topic                  | Logic Building (Small Programs)            | LeetCode Problems                                                                 |Move Zeroes
 |-----|-----------------------|-------------------------------------------|----------------------------------------------------------------------------------|
 | 1   | Arrays Basics         | Max-Min, Reverse, Sum                     | Contains Duplicate, Max Element, Move Zeroes, Best Time to Buy Sell Stock, Find Min |   -----------------DONE  UPDATE ***
 | 2   | Hashing               | Frequency Count, First Unique             | Two Sum, Valid Anagram, Intersection of Arrays, First Unique Character, Happy Number |
