@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DSA Plan</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    const days = [
+      {
+        day: 1,
+        topic: "Arrays Basics",
+        color: "#FF6B35",
+        icon: "▦",
+        logic: ["Max & Min finder", "Array reversal", "Sum calculator"],
+        leetcode: [
+          { name: "Contains Duplicate", id: "217", diff: "Easy" },
+          { name: "Max Element", id: "1", diff: "Easy" },
+          { name: "Move Zeroes", id: "283", diff: "Easy" },
+          { name: "Best Time to Buy & Sell Stock", id: "121", diff: "Easy" },
+          { name: "Find Min", id: "153", diff: "Medium" },
+        ],
+      },
+      {
+        day: 2,
+        topic: "Hashing",
+        color: "#F7C948",
+        icon: "#",
+        logic: ["Frequency count map", "First unique finder"],
+        leetcode: [
+          { name: "Two Sum", id: "1", diff: "Easy" },
+          { name: "Valid Anagram", id: "242", diff: "Easy" },
+          { name: "Intersection of Arrays", id: "349", diff: "Easy" },
+          { name: "First Unique Character", id: "387", diff: "Easy" },
+          { name: "Happy Number", id: "202", diff: "Easy" },
+        ],
+      },
+      {
+        day: 3,
+        topic: "Prefix Sum",
+        color: "#4ECDC4",
+        icon: "Σ",
+        logic: ["Running sum builder", "Range sum query"],
+        leetcode: [
+          { name: "Running Sum 1D Array", id: "1480", diff: "Easy" },
+          { name: "Subarray Sum = K", id: "560", diff: "Medium" },
+          { name: "Range Sum Query", id: "303", diff: "Easy" },
+          { name: "Pivot Index", id: "724", diff: "Easy" },
+          { name: "Continuous Subarray Sum", id: "523", diff: "Medium" },
+        ],
+      },
+      {
+        day: 4,
+        topic: "Sliding Window Fixed",
+        color: "#A8E6CF",
+        icon: "⬛",
+        logic: ["Max sum of window size K"],
+        leetcode: [
+          { name: "Max Sum Subarray Size K", id: "643", diff: "Easy" },
+          { name: "Avg of Subarray", id: "643", diff: "Easy" },
+          { name: "Max Vowels in Substring", id: "1456", diff: "Medium" },
+          { name: "Diet Plan Performance", id: "1176", diff: "Easy" },
+          { name: "Grumpy Bookstore", id: "1052", diff: "Medium" },
+        ],
+      },
+      {
+        day: 5,
+        topic: "Sliding Window Variable",
+        color: "#C3B1E1",
+        icon: "↔",
+        logic: ["Longest substring logic", "Expand/shrink window"],
+        leetcode: [
+          { name: "Longest Substring No Repeat", id: "3", diff: "Medium" },
+          { name: "Min Size Subarray Sum", id: "209", diff: "Medium" },
+          { name: "Fruit Into Baskets", id: "904", diff: "Medium" },
+          { name: "Permutation in String", id: "567", diff: "Medium" },
+          { name: "Longest Repeating Char Replacement", id: "424", diff: "Medium" },
+        ],
+      },
+      {
+        day: 6,
+        topic: "Strings",
+        color: "#FF8FAB",
+        icon: "Aa",
+        logic: ["String reversal", "Palindrome checker"],
+        leetcode: [
+          { name: "Valid Palindrome", id: "125", diff: "Easy" },
+          { name: "Longest Common Prefix", id: "14", diff: "Easy" },
+          { name: "Reverse Words in String", id: "151", diff: "Medium" },
+          { name: "String Compression", id: "443", diff: "Medium" },
+          { name: "Valid Parentheses", id: "20", diff: "Easy" },
+        ],
+      },
+      {
+        day: 7,
+        topic: "Recursion",
+        color: "#87CEEB",
+        icon: "↺",
+        logic: ["Factorial", "Fibonacci sequence"],
+        leetcode: [
+          { name: "Climbing Stairs", id: "70", diff: "Easy" },
+          { name: "Power of Two", id: "231", diff: "Easy" },
+          { name: "Fibonacci Number", id: "509", diff: "Easy" },
+          { name: "Subsets", id: "78", diff: "Medium" },
+          { name: "Generate Parentheses", id: "22", diff: "Medium" },
+        ],
+      },
+      {
+        day: 8,
+        topic: "Sorting",
+        color: "#FFB347",
+        icon: "⇅",
+        logic: ["Bubble sort", "Selection sort"],
+        leetcode: [
+          { name: "Sort Colors", id: "75", diff: "Medium" },
+          { name: "Merge Sorted Array", id: "88", diff: "Easy" },
+          { name: "Majority Element", id: "169", diff: "Easy" },
+          { name: "Kth Largest Element", id: "215", diff: "Medium" },
+          { name: "Relative Sort Array", id: "1122", diff: "Easy" },
+        ],
+      },
+      {
+        day: 9,
+        topic: "Binary Search",
+        color: "#98D8C8",
+        icon: "⌗",
+        logic: ["Basic search", "First/last occurrence"],
+        leetcode: [
+          { name: "Binary Search", id: "704", diff: "Easy" },
+          { name: "Search Insert Position", id: "35", diff: "Easy" },
+          { name: "First Bad Version", id: "278", diff: "Easy" },
+          { name: "Find Peak Element", id: "162", diff: "Medium" },
+          { name: "Sqrt(x)", id: "69", diff: "Easy" },
+        ],
+      },
+      {
+        day: 10,
+        topic: "Mixed Revision",
+        color: "#DDA0DD",
+        icon: "✓",
+        logic: ["Dry run all patterns", "Pattern recognition"],
+        leetcode: [
+          { name: "Two Sum", id: "1", diff: "Easy" },
+          { name: "Subarray Sum = K", id: "560", diff: "Medium" },
+          { name: "Longest Substring", id: "3", diff: "Medium" },
+          { name: "Binary Search", id: "704", diff: "Easy" },
+          { name: "Sort Colors", id: "75", diff: "Medium" },
+        ],
+      },
+    ];
+
+    const schedule = [
+      { time: "30 min", label: "Concept Learning", icon: "📖", desc: "Read theory, understand pattern" },
+      { time: "30 min", label: "Logic Building", icon: "🔧", desc: "Small programs, no LC pressure" },
+      { time: "1–2 hrs", label: "LeetCode Practice", icon: "💻", desc: "Solve 3–5 problems" },
+      { time: "20 min", label: "Dry Run", icon: "✏️", desc: "Pen-paper trace through" },
+    ];
+
+    const diffColor = { Easy: "#4ECDC4", Medium: "#F7C948", Hard: "#FF6B35" };
+
+    function DSAPlan() {
+      const [active, setActive] = useState(0);
+      const [done, setDone] = useState({});
+
+      const toggleDone = (dayIdx, lcIdx) => {
+        const key = `${dayIdx}-${lcIdx}`;
+        setDone(prev => ({ ...prev, [key]: !prev[key] }));
+      };
+
+      const dayDone = (dayIdx) => {
+        const lc = days[dayIdx].leetcode;
+        return lc.filter((_, i) => done[`${dayIdx}-${i}`]).length;
+      };
+
+      const totalDone = Object.values(done).filter(Boolean).length;
+      const totalLC = days.reduce((a, d) => a + d.leetcode.length, 0);
+
+      return (
+        <div style={{
+          minHeight: "100vh",
+          background: "#0D0D0D",
+          fontFamily: "'Courier New', monospace",
+          color: "#E8E8E0",
+          padding: "0",
+          overflowX: "hidden",
+        }}>
+          {/* Header */}
+          <div style={{
+            borderBottom: "2px solid #222",
+            padding: "28px 32px 20px",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "12px",
+          }}>
+            <div>
+              <div style={{ fontSize: "11px", letterSpacing: "4px", color: "#555", marginBottom: "4px" }}>
+                DSA GRIND — 10 DAY BOOTCAMP
+              </div>
+              <div style={{ fontSize: "28px", fontWeight: "900", letterSpacing: "-1px", color: "#fff" }}>
+                ARRAYS → BINARY SEARCH
+              </div>
+            </div>
+            <div style={{
+              background: "#161616",
+              border: "1px solid #2a2a2a",
+              padding: "10px 20px",
+              fontSize: "13px",
+              color: "#888",
+            }}>
+              <span style={{ color: "#fff", fontSize: "20px", fontWeight: "700" }}>{totalDone}</span>
+              <span style={{ margin: "0 6px" }}>/</span>
+              <span>{totalLC}</span>
+              <span style={{ marginLeft: "8px", fontSize: "11px", letterSpacing: "2px" }}>LC DONE</span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", minHeight: "calc(100vh - 90px)" }}>
+
+            {/* Sidebar */}
+            <div style={{
+              width: "220px",
+              minWidth: "220px",
+              borderRight: "1px solid #1a1a1a",
+              padding: "16px 0",
+              background: "#0A0A0A",
+            }}>
+              {days.map((d, i) => {
+                const pct = Math.round((dayDone(i) / d.leetcode.length) * 100);
+                return (
+                  <div
+                    key={i}
+                    onClick={() => setActive(i)}
+                    style={{
+                      padding: "12px 20px",
+                      cursor: "pointer",
+                      borderLeft: active === i ? `3px solid ${d.color}` : "3px solid transparent",
+                      background: active === i ? "#141414" : "transparent",
+                      transition: "all 0.15s",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <span style={{
+                        fontSize: "16px",
+                        width: "24px",
+                        textAlign: "center",
+                        color: d.color,
+                        fontWeight: "700",
+                      }}>{d.icon}</span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: "10px", color: "#444", marginBottom: "2px" }}>DAY {d.day}</div>
+                        <div style={{
+                          fontSize: "12px",
+                          color: active === i ? "#fff" : "#888",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}>{d.topic}</div>
+                        <div style={{
+                          marginTop: "5px",
+                          height: "2px",
+                          background: "#1a1a1a",
+                          borderRadius: "1px",
+                        }}>
+                          <div style={{
+                            height: "100%",
+                            width: `${pct}%`,
+                            background: d.color,
+                            borderRadius: "1px",
+                            transition: "width 0.3s",
+                          }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Daily Structure */}
+              <div style={{ margin: "24px 16px 0", borderTop: "1px solid #1a1a1a", paddingTop: "16px" }}>
+                <div style={{ fontSize: "9px", letterSpacing: "3px", color: "#333", marginBottom: "12px" }}>
+                  DAILY STRUCTURE
+                </div>
+                {schedule.map((s, i) => (
+                  <div key={i} style={{ marginBottom: "10px", display: "flex", gap: "8px", alignItems: "flex-start" }}>
+                    <span style={{ fontSize: "14px" }}>{s.icon}</span>
+                    <div>
+                      <div style={{ fontSize: "10px", color: "#666", fontWeight: "700" }}>{s.time}</div>
+                      <div style={{ fontSize: "11px", color: "#888" }}>{s.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Main Panel */}
+            <div style={{ flex: 1, padding: "28px 32px", overflowY: "auto" }}>
+              {(() => {
+                const d = days[active];
+                return (
+                  <>
+                    {/* Day Header */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
+                      <div style={{
+                        width: "56px", height: "56px",
+                        background: d.color + "18",
+                        border: `2px solid ${d.color}`,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: "22px", fontWeight: "900", color: d.color,
+                      }}>
+                        {d.icon}
+                      </div>
+                      <div>
+                        <div style={{ fontSize: "11px", letterSpacing: "3px", color: "#444" }}>DAY {d.day} OF 10</div>
+                        <div style={{ fontSize: "24px", fontWeight: "900", color: "#fff", letterSpacing: "-0.5px" }}>
+                          {d.topic.toUpperCase()}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Logic Building */}
+                    <div style={{ marginBottom: "28px" }}>
+                      <div style={{ fontSize: "10px", letterSpacing: "4px", color: "#444", marginBottom: "12px" }}>
+                        LOGIC BUILDING — PRACTICE FIRST
+                      </div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                        {d.logic.map((l, i) => (
+                          <div key={i} style={{
+                            padding: "8px 16px",
+                            border: `1px solid ${d.color}44`,
+                            background: d.color + "0a",
+                            fontSize: "13px",
+                            color: d.color,
+                            letterSpacing: "0.5px",
+                          }}>
+                            → {l}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* LeetCode Problems */}
+                    <div>
+                      <div style={{ fontSize: "10px", letterSpacing: "4px", color: "#444", marginBottom: "12px" }}>
+                        LEETCODE PROBLEMS — {dayDone(active)}/{d.leetcode.length} DONE
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                        {d.leetcode.map((lc, i) => {
+                          const key = `${active}-${i}`;
+                          const isDone = done[key];
+                          return (
+                            <div
+                              key={i}
+                              onClick={() => toggleDone(active, i)}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "16px",
+                                padding: "14px 18px",
+                                background: isDone ? "#0f1a0f" : "#111",
+                                border: `1px solid ${isDone ? "#1a3a1a" : "#1e1e1e"}`,
+                                cursor: "pointer",
+                                transition: "all 0.15s",
+                                opacity: isDone ? 0.7 : 1,
+                              }}
+                            >
+                              <div style={{
+                                width: "20px", height: "20px",
+                                border: `2px solid ${isDone ? "#4CAF50" : "#333"}`,
+                                background: isDone ? "#4CAF50" : "transparent",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                                fontSize: "12px", color: "#fff", flexShrink: 0,
+                                transition: "all 0.15s",
+                              }}>
+                                {isDone ? "✓" : ""}
+                              </div>
+
+                              <div style={{ flex: 1 }}>
+                                <span style={{
+                                  fontSize: "14px",
+                                  color: isDone ? "#555" : "#ccc",
+                                  textDecoration: isDone ? "line-through" : "none",
+                                }}>
+                                  {lc.name}
+                                </span>
+                              </div>
+
+                              <div style={{
+                                fontSize: "10px",
+                                fontWeight: "700",
+                                color: diffColor[lc.diff],
+                                letterSpacing: "1px",
+                                minWidth: "48px",
+                                textAlign: "right",
+                              }}>
+                                {lc.diff.toUpperCase()}
+                              </div>
+
+                              <a
+                                href={`https://leetcode.com/problems/${lc.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}/`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={e => e.stopPropagation()}
+                                style={{
+                                  fontSize: "11px",
+                                  color: d.color,
+                                  textDecoration: "none",
+                                  padding: "4px 10px",
+                                  border: `1px solid ${d.color}44`,
+                                  letterSpacing: "1px",
+                                }}
+                              >
+                                OPEN →
+                              </a>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Daily Schedule for this day */}
+                    <div style={{ marginTop: "36px", borderTop: "1px solid #1a1a1a", paddingTop: "24px" }}>
+                      <div style={{ fontSize: "10px", letterSpacing: "4px", color: "#444", marginBottom: "16px" }}>
+                        TODAY'S SCHEDULE
+                      </div>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px" }}>
+                        {schedule.map((s, i) => (
+                          <div key={i} style={{
+                            padding: "14px 16px",
+                            background: "#0f0f0f",
+                            border: "1px solid #1a1a1a",
+                          }}>
+                            <div style={{ fontSize: "18px", marginBottom: "6px" }}>{s.icon}</div>
+                            <div style={{ fontSize: "11px", color: d.color, fontWeight: "700", marginBottom: "3px" }}>
+                              {s.time}
+                            </div>
+                            <div style={{ fontSize: "12px", color: "#888" }}>{s.label}</div>
+                            <div style={{ fontSize: "11px", color: "#444", marginTop: "4px" }}>{s.desc}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<DSAPlan />);
+  </script>
+</body>
+
+</html>
