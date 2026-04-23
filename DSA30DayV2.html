@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>30-Day DSA Plan + Practice</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0D0D0D; color: #E8E8E0; font-family: 'Courier New', monospace; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #2a2a2a; }
+    a { text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // ─────────────────────────────────────────────
+    //  30-DAY PLAN DATA
+    // ─────────────────────────────────────────────
+    const days = [
+      { day:1, topic:"Arrays Basics", phase:"Arrays", color:"#FF6B35", icon:"▦",
+        logic:["Max & Min finder","Array reversal","Sum of array"],
+        leetcode:[
+          {name:"Contains Duplicate",diff:"Easy",slug:"contains-duplicate"},
+          {name:"Move Zeroes",diff:"Easy",slug:"move-zeroes"},
+          {name:"Best Time to Buy and Sell Stock",diff:"Easy",slug:"best-time-to-buy-and-sell-stock"},
+          {name:"Find the Highest Altitude",diff:"Easy",slug:"find-the-highest-altitude"},
+        ]},
+      { day:2, topic:"Arrays Intermediate", phase:"Arrays", color:"#FF6B35", icon:"▦",
+        logic:["Reverse in-place","Rotate array","Remove duplicates"],
+        leetcode:[
+          {name:"Rotate Array",diff:"Medium",slug:"rotate-array"},
+          {name:"Remove Duplicates from Sorted Array",diff:"Easy",slug:"remove-duplicates-from-sorted-array"},
+          {name:"Find Min in Rotated Array",diff:"Medium",slug:"find-minimum-in-rotated-sorted-array"},
+          {name:"Missing Number",diff:"Easy",slug:"missing-number"},
+        ]},
+      { day:3, topic:"Arrays Advanced", phase:"Arrays", color:"#FF6B35", icon:"▦",
+        logic:["Two pointer logic","Merge two arrays"],
+        leetcode:[
+          {name:"Merge Sorted Array",diff:"Easy",slug:"merge-sorted-array"},
+          {name:"Two Sum II Sorted",diff:"Medium",slug:"two-sum-ii-input-array-is-sorted"},
+          {name:"3Sum",diff:"Medium",slug:"3sum"},
+          {name:"Product of Array Except Self",diff:"Medium",slug:"product-of-array-except-self"},
+        ]},
+      { day:4, topic:"Hashing Basics", phase:"Hashing", color:"#F7C948", icon:"#",
+        logic:["Frequency count map","First unique finder"],
+        leetcode:[
+          {name:"Two Sum",diff:"Easy",slug:"two-sum"},
+          {name:"Valid Anagram",diff:"Easy",slug:"valid-anagram"},
+          {name:"First Unique Character",diff:"Easy",slug:"first-unique-character-in-a-string"},
+          {name:"Happy Number",diff:"Easy",slug:"happy-number"},
+        ]},
+      { day:5, topic:"Hashing Advanced", phase:"Hashing", color:"#F7C948", icon:"#",
+        logic:["Group by frequency","Count pairs"],
+        leetcode:[
+          {name:"Intersection of Two Arrays",diff:"Easy",slug:"intersection-of-two-arrays"},
+          {name:"Group Anagrams",diff:"Medium",slug:"group-anagrams"},
+          {name:"Top K Frequent Elements",diff:"Medium",slug:"top-k-frequent-elements"},
+          {name:"Longest Consecutive Sequence",diff:"Medium",slug:"longest-consecutive-sequence"},
+        ]},
+      { day:6, topic:"Prefix Sum Basics", phase:"Prefix Sum", color:"#4ECDC4", icon:"Σ",
+        logic:["Build prefix array","Range query O(1)"],
+        leetcode:[
+          {name:"Running Sum of 1D Array",diff:"Easy",slug:"running-sum-of-1d-array"},
+          {name:"Range Sum Query Immutable",diff:"Easy",slug:"range-sum-query-immutable"},
+          {name:"Find Pivot Index",diff:"Easy",slug:"find-pivot-index"},
+          {name:"Left and Right Sum Differences",diff:"Easy",slug:"left-and-right-sum-differences"},
+        ]},
+      { day:7, topic:"Prefix Sum Advanced", phase:"Prefix Sum", color:"#4ECDC4", icon:"Σ",
+        logic:["Prefix + HashMap combo","Subarray sum pattern"],
+        leetcode:[
+          {name:"Subarray Sum Equals K",diff:"Medium",slug:"subarray-sum-equals-k"},
+          {name:"Continuous Subarray Sum",diff:"Medium",slug:"continuous-subarray-sum"},
+          {name:"Number of Ways to Split Array",diff:"Medium",slug:"number-of-ways-to-split-array"},
+          {name:"Count Nice Subarrays",diff:"Medium",slug:"count-number-of-nice-subarrays"},
+        ]},
+      { day:8, topic:"Sliding Window Fixed", phase:"Sliding Window", color:"#A8E6CF", icon:"⬛",
+        logic:["Max sum window size K","Average of window"],
+        leetcode:[
+          {name:"Maximum Average Subarray I",diff:"Easy",slug:"maximum-average-subarray-i"},
+          {name:"Max Vowels in K Length Substring",diff:"Medium",slug:"maximum-number-of-vowels-in-a-substring-of-given-length"},
+          {name:"Diet Plan Performance",diff:"Easy",slug:"diet-plan-performance"},
+          {name:"Grumpy Bookstore Owner",diff:"Medium",slug:"grumpy-bookstore-owner"},
+        ]},
+      { day:9, topic:"Sliding Window Variable", phase:"Sliding Window", color:"#A8E6CF", icon:"↔",
+        logic:["Expand/shrink window","Two pointer + condition"],
+        leetcode:[
+          {name:"Longest Substring Without Repeating",diff:"Medium",slug:"longest-substring-without-repeating-characters"},
+          {name:"Minimum Size Subarray Sum",diff:"Medium",slug:"minimum-size-subarray-sum"},
+          {name:"Fruit Into Baskets",diff:"Medium",slug:"fruit-into-baskets"},
+          {name:"Permutation in String",diff:"Medium",slug:"permutation-in-string"},
+          {name:"Longest Repeating Char Replacement",diff:"Medium",slug:"longest-repeating-character-replacement"},
+        ]},
+      { day:10, topic:"Strings Basics", phase:"Strings", color:"#FF8FAB", icon:"Aa",
+        logic:["Reverse string","Check palindrome","Count vowels"],
+        leetcode:[
+          {name:"Valid Palindrome",diff:"Easy",slug:"valid-palindrome"},
+          {name:"Reverse String",diff:"Easy",slug:"reverse-string"},
+          {name:"Longest Common Prefix",diff:"Easy",slug:"longest-common-prefix"},
+          {name:"Valid Parentheses",diff:"Easy",slug:"valid-parentheses"},
+        ]},
+      { day:11, topic:"Strings Advanced", phase:"Strings", color:"#FF8FAB", icon:"Aa",
+        logic:["String compression","Anagram checker"],
+        leetcode:[
+          {name:"Reverse Words in a String",diff:"Medium",slug:"reverse-words-in-a-string"},
+          {name:"String Compression",diff:"Medium",slug:"string-compression"},
+          {name:"Decode String",diff:"Medium",slug:"decode-string"},
+          {name:"Minimum Window Substring",diff:"Hard",slug:"minimum-window-substring"},
+        ]},
+      { day:12, topic:"Recursion Basics", phase:"Recursion", color:"#87CEEB", icon:"↺",
+        logic:["Factorial","Fibonacci","Power(x,n)"],
+        leetcode:[
+          {name:"Climbing Stairs",diff:"Easy",slug:"climbing-stairs"},
+          {name:"Power of Two",diff:"Easy",slug:"power-of-two"},
+          {name:"Fibonacci Number",diff:"Easy",slug:"fibonacci-number"},
+          {name:"Reverse String Recursive",diff:"Easy",slug:"reverse-string"},
+        ]},
+      { day:13, topic:"Recursion Advanced", phase:"Recursion", color:"#87CEEB", icon:"↺",
+        logic:["Subsets generation","Permutations"],
+        leetcode:[
+          {name:"Subsets",diff:"Medium",slug:"subsets"},
+          {name:"Permutations",diff:"Medium",slug:"permutations"},
+          {name:"Generate Parentheses",diff:"Medium",slug:"generate-parentheses"},
+          {name:"Letter Combinations of Phone Number",diff:"Medium",slug:"letter-combinations-of-a-phone-number"},
+        ]},
+      { day:14, topic:"Sorting Basics", phase:"Sorting", color:"#FFB347", icon:"⇅",
+        logic:["Bubble sort","Selection sort","Insertion sort"],
+        leetcode:[
+          {name:"Sort Colors",diff:"Medium",slug:"sort-colors"},
+          {name:"Majority Element",diff:"Easy",slug:"majority-element"},
+          {name:"Relative Sort Array",diff:"Easy",slug:"relative-sort-array"},
+          {name:"Sort Array By Parity",diff:"Easy",slug:"sort-array-by-parity"},
+        ]},
+      { day:15, topic:"Sorting Advanced", phase:"Sorting", color:"#FFB347", icon:"⇅",
+        logic:["Merge sort","Quick sort idea","Count sort"],
+        leetcode:[
+          {name:"Kth Largest Element in Array",diff:"Medium",slug:"kth-largest-element-in-an-array"},
+          {name:"Largest Number",diff:"Medium",slug:"largest-number"},
+          {name:"Merge Intervals",diff:"Medium",slug:"merge-intervals"},
+          {name:"Meeting Rooms",diff:"Easy",slug:"meeting-rooms"},
+        ]},
+      { day:16, topic:"Binary Search Basics", phase:"Binary Search", color:"#98D8C8", icon:"⌗",
+        logic:["Classic BS on sorted array","First/last occurrence"],
+        leetcode:[
+          {name:"Binary Search",diff:"Easy",slug:"binary-search"},
+          {name:"Search Insert Position",diff:"Easy",slug:"search-insert-position"},
+          {name:"First Bad Version",diff:"Easy",slug:"first-bad-version"},
+          {name:"Sqrt(x)",diff:"Easy",slug:"sqrtx"},
+        ]},
+      { day:17, topic:"Binary Search Advanced", phase:"Binary Search", color:"#98D8C8", icon:"⌗",
+        logic:["BS on answer","BS on rotated array"],
+        leetcode:[
+          {name:"Find Peak Element",diff:"Medium",slug:"find-peak-element"},
+          {name:"Search in Rotated Sorted Array",diff:"Medium",slug:"search-in-rotated-sorted-array"},
+          {name:"Kth Smallest in Sorted Matrix",diff:"Medium",slug:"kth-smallest-element-in-a-sorted-matrix"},
+          {name:"Capacity to Ship Packages Within D Days",diff:"Medium",slug:"capacity-to-ship-packages-within-d-days"},
+        ]},
+      { day:18, topic:"Linked List Basics", phase:"Linked List", color:"#C3B1E1", icon:"⇢",
+        logic:["Build LL manually","Traverse + print","Find length"],
+        leetcode:[
+          {name:"Reverse Linked List",diff:"Easy",slug:"reverse-linked-list"},
+          {name:"Merge Two Sorted Lists",diff:"Easy",slug:"merge-two-sorted-lists"},
+          {name:"Middle of Linked List",diff:"Easy",slug:"middle-of-the-linked-list"},
+          {name:"Remove Duplicates from Sorted List",diff:"Easy",slug:"remove-duplicates-from-sorted-list"},
+        ]},
+      { day:19, topic:"Linked List Advanced", phase:"Linked List", color:"#C3B1E1", icon:"⇢",
+        logic:["Floyd cycle detection","Two pointer on LL"],
+        leetcode:[
+          {name:"Linked List Cycle",diff:"Easy",slug:"linked-list-cycle"},
+          {name:"Remove Nth Node From End",diff:"Medium",slug:"remove-nth-node-from-end-of-list"},
+          {name:"Reorder List",diff:"Medium",slug:"reorder-list"},
+          {name:"LRU Cache",diff:"Medium",slug:"lru-cache"},
+        ]},
+      { day:20, topic:"Stack Basics", phase:"Stack & Queue", color:"#B5EAD7", icon:"⊟",
+        logic:["Implement stack","Balanced brackets check"],
+        leetcode:[
+          {name:"Valid Parentheses",diff:"Easy",slug:"valid-parentheses"},
+          {name:"Min Stack",diff:"Medium",slug:"min-stack"},
+          {name:"Evaluate Reverse Polish Notation",diff:"Medium",slug:"evaluate-reverse-polish-notation"},
+          {name:"Remove All Adjacent Duplicates",diff:"Easy",slug:"remove-all-adjacent-duplicates-in-string"},
+        ]},
+      { day:21, topic:"Queue & Monotonic Stack", phase:"Stack & Queue", color:"#B5EAD7", icon:"⊟",
+        logic:["Queue with stacks","Monotonic stack pattern"],
+        leetcode:[
+          {name:"Daily Temperatures",diff:"Medium",slug:"daily-temperatures"},
+          {name:"Next Greater Element I",diff:"Easy",slug:"next-greater-element-i"},
+          {name:"Sliding Window Maximum",diff:"Hard",slug:"sliding-window-maximum"},
+          {name:"Number of Visible People in Queue",diff:"Hard",slug:"number-of-visible-people-in-a-queue"},
+        ]},
+      { day:22, topic:"Greedy Basics", phase:"Greedy", color:"#FFDAC1", icon:"↯",
+        logic:["Local optimal choice","Interval scheduling"],
+        leetcode:[
+          {name:"Jump Game",diff:"Medium",slug:"jump-game"},
+          {name:"Best Time to Buy and Sell Stock II",diff:"Medium",slug:"best-time-to-buy-and-sell-stock-ii"},
+          {name:"Assign Cookies",diff:"Easy",slug:"assign-cookies"},
+          {name:"Lemonade Change",diff:"Easy",slug:"lemonade-change"},
+        ]},
+      { day:23, topic:"Greedy Advanced", phase:"Greedy", color:"#FFDAC1", icon:"↯",
+        logic:["Activity selection","Fractional knapsack idea"],
+        leetcode:[
+          {name:"Jump Game II",diff:"Medium",slug:"jump-game-ii"},
+          {name:"Gas Station",diff:"Medium",slug:"gas-station"},
+          {name:"Non-overlapping Intervals",diff:"Medium",slug:"non-overlapping-intervals"},
+          {name:"Minimum Arrows to Burst Balloons",diff:"Medium",slug:"minimum-number-of-arrows-to-burst-balloons"},
+        ]},
+      { day:24, topic:"DP Basics 1D", phase:"Dynamic Programming", color:"#DDA0DD", icon:"◈",
+        logic:["Fibonacci with memo","Tabulation approach"],
+        leetcode:[
+          {name:"Climbing Stairs",diff:"Easy",slug:"climbing-stairs"},
+          {name:"House Robber",diff:"Medium",slug:"house-robber"},
+          {name:"Min Cost Climbing Stairs",diff:"Easy",slug:"min-cost-climbing-stairs"},
+          {name:"N-th Tribonacci Number",diff:"Easy",slug:"n-th-tribonacci-number"},
+        ]},
+      { day:25, topic:"DP Intermediate", phase:"Dynamic Programming", color:"#DDA0DD", icon:"◈",
+        logic:["0/1 knapsack pattern","Coin change logic"],
+        leetcode:[
+          {name:"Coin Change",diff:"Medium",slug:"coin-change"},
+          {name:"Longest Increasing Subsequence",diff:"Medium",slug:"longest-increasing-subsequence"},
+          {name:"Word Break",diff:"Medium",slug:"word-break"},
+          {name:"Partition Equal Subset Sum",diff:"Medium",slug:"partition-equal-subset-sum"},
+        ]},
+      { day:26, topic:"DP Advanced 2D", phase:"Dynamic Programming", color:"#DDA0DD", icon:"◈",
+        logic:["Grid DP","String DP LCS/Edit"],
+        leetcode:[
+          {name:"Unique Paths",diff:"Medium",slug:"unique-paths"},
+          {name:"Minimum Path Sum",diff:"Medium",slug:"minimum-path-sum"},
+          {name:"Longest Common Subsequence",diff:"Medium",slug:"longest-common-subsequence"},
+          {name:"Edit Distance",diff:"Medium",slug:"edit-distance"},
+        ]},
+      { day:27, topic:"Trees Basics", phase:"Trees", color:"#B5D5C5", icon:"⌥",
+        logic:["Build BST manually","DFS inorder/preorder/postorder"],
+        leetcode:[
+          {name:"Maximum Depth of Binary Tree",diff:"Easy",slug:"maximum-depth-of-binary-tree"},
+          {name:"Invert Binary Tree",diff:"Easy",slug:"invert-binary-tree"},
+          {name:"Symmetric Tree",diff:"Easy",slug:"symmetric-tree"},
+          {name:"Path Sum",diff:"Easy",slug:"path-sum"},
+        ]},
+      { day:28, topic:"Trees BFS + BST", phase:"Trees", color:"#B5D5C5", icon:"⌥",
+        logic:["BFS level order","BST insert/search"],
+        leetcode:[
+          {name:"Binary Tree Level Order Traversal",diff:"Medium",slug:"binary-tree-level-order-traversal"},
+          {name:"Diameter of Binary Tree",diff:"Easy",slug:"diameter-of-binary-tree"},
+          {name:"Validate Binary Search Tree",diff:"Medium",slug:"validate-binary-search-tree"},
+          {name:"Lowest Common Ancestor of BST",diff:"Medium",slug:"lowest-common-ancestor-of-a-binary-search-tree"},
+        ]},
+      { day:29, topic:"Trees Advanced", phase:"Trees", color:"#B5D5C5", icon:"⌥",
+        logic:["Serialize/deserialize tree","Tree DP pattern"],
+        leetcode:[
+          {name:"Binary Tree Right Side View",diff:"Medium",slug:"binary-tree-right-side-view"},
+          {name:"Count Good Nodes in Binary Tree",diff:"Medium",slug:"count-good-nodes-in-binary-tree"},
+          {name:"Kth Smallest Element in BST",diff:"Medium",slug:"kth-smallest-element-in-a-bst"},
+          {name:"Construct Tree from Preorder and Inorder",diff:"Medium",slug:"construct-binary-tree-from-preorder-and-inorder-traversal"},
+        ]},
+      { day:30, topic:"Full Revision", phase:"Revision", color:"#FFD700", icon:"✓",
+        logic:["Dry run all 9 patterns","Time/space complexity review"],
+        leetcode:[
+          {name:"Two Sum (Hash pattern)",diff:"Easy",slug:"two-sum"},
+          {name:"Subarray Sum Equals K (Prefix)",diff:"Medium",slug:"subarray-sum-equals-k"},
+          {name:"Longest Substring No Repeat (Sliding)",diff:"Medium",slug:"longest-substring-without-repeating-characters"},
+          {name:"House Robber (DP)",diff:"Medium",slug:"house-robber"},
+          {name:"Binary Tree Level Order (BFS)",diff:"Medium",slug:"binary-tree-level-order-traversal"},
+        ]},
+    ];
+
+    // ─────────────────────────────────────────────
+    //  PRACTICE SECTION DATA
+    // ─────────────────────────────────────────────
+    const practiceTopics = [
+      {
+        topic: "Arrays", color: "#FF6B35", icon: "▦",
+        programs: [
+          { name: "Find max and min in array", hint: "Loop once, track two vars" },
+          { name: "Reverse array in-place", hint: "Two pointer: swap left↔right" },
+          { name: "Count even/odd numbers", hint: "Loop + modulo check" },
+          { name: "Remove duplicates from unsorted array", hint: "Use HashSet, rebuild array" },
+          { name: "Move all negatives to left", hint: "Two pointer partition" },
+          { name: "Find second largest element", hint: "Track largest and second in one loop" },
+          { name: "Rotate array left by K positions", hint: "Reverse trick: reverse all, reverse parts" },
+          { name: "Check if array is sorted", hint: "Loop check arr[i] > arr[i+1]" },
+        ],
+        extra: [
+          {name:"Find All Numbers Disappeared in Array",diff:"Easy",slug:"find-all-numbers-disappeared-in-an-array"},
+          {name:"Maximum Subarray (Kadane)",diff:"Medium",slug:"maximum-subarray"},
+          {name:"Squares of Sorted Array",diff:"Easy",slug:"squares-of-a-sorted-array"},
+          {name:"Check If Array Is Sorted and Rotated",diff:"Easy",slug:"check-if-array-is-sorted-and-rotated"},
+          {name:"Find Duplicate Number",diff:"Medium",slug:"find-the-duplicate-number"},
+          {name:"Max Consecutive Ones",diff:"Easy",slug:"max-consecutive-ones"},
+        ],
+      },
+      {
+        topic: "Hashing", color: "#F7C948", icon: "#",
+        programs: [
+          { name: "Count frequency of each element", hint: "HashMap<Integer,Integer>" },
+          { name: "Find first non-repeating character", hint: "LinkedHashMap to preserve order" },
+          { name: "Check if two strings are anagrams", hint: "Frequency map comparison" },
+          { name: "Find pair with given sum", hint: "HashSet: check target-current" },
+          { name: "Print all duplicates in array", hint: "Map, print where count > 1" },
+          { name: "Union and intersection of two arrays", hint: "Use HashSet for both" },
+          { name: "Group words by anagram", hint: "Sort each word as key in map" },
+        ],
+        extra: [
+          {name:"Ransom Note",diff:"Easy",slug:"ransom-note"},
+          {name:"Word Pattern",diff:"Easy",slug:"word-pattern"},
+          {name:"Find Common Characters",diff:"Easy",slug:"find-common-characters"},
+          {name:"Subdomain Visit Count",diff:"Medium",slug:"subdomain-visit-count"},
+          {name:"4Sum II",diff:"Medium",slug:"4sum-ii"},
+        ],
+      },
+      {
+        topic: "Prefix Sum", color: "#4ECDC4", icon: "Σ",
+        programs: [
+          { name: "Build prefix sum array", hint: "prefix[i] = prefix[i-1] + arr[i]" },
+          { name: "Range sum query [L, R]", hint: "prefix[R] - prefix[L-1]" },
+          { name: "Count subarrays with sum = K", hint: "HashMap of prefix sums" },
+          { name: "Find equilibrium index", hint: "Where leftSum == rightSum" },
+          { name: "Max sum subarray using prefix", hint: "Track max of prefix[j]-min_prefix[i]" },
+        ],
+        extra: [
+          {name:"Product of Array Except Self",diff:"Medium",slug:"product-of-array-except-self"},
+          {name:"Sum of Absolute Differences in Sorted Array",diff:"Medium",slug:"sum-of-absolute-differences-in-a-sorted-array"},
+          {name:"Maximum Size Subarray Sum Equals K",diff:"Medium",slug:"maximum-size-subarray-sum-equals-k"},
+          {name:"Binary Subarrays With Sum",diff:"Medium",slug:"binary-subarrays-with-sum"},
+        ],
+      },
+      {
+        topic: "Sliding Window", color: "#A8E6CF", icon: "↔",
+        programs: [
+          { name: "Max sum of K consecutive elements", hint: "Add next, remove first in window" },
+          { name: "Count distinct elements in every window K", hint: "HashMap + window slide" },
+          { name: "Smallest subarray with sum >= S", hint: "Variable window: shrink when valid" },
+          { name: "Longest substring with K unique chars", hint: "Map + two pointer" },
+          { name: "First negative in every window K", hint: "Deque of indices" },
+        ],
+        extra: [
+          {name:"Max Consecutive Ones III",diff:"Medium",slug:"max-consecutive-ones-iii"},
+          {name:"Longest Subarray of 1s After Deleting One Element",diff:"Medium",slug:"longest-subarray-of-1s-after-deleting-one-element"},
+          {name:"Substrings of Size Three with Distinct Chars",diff:"Easy",slug:"substrings-of-size-three-with-distinct-characters"},
+          {name:"Minimum Operations to Reduce X to Zero",diff:"Medium",slug:"minimum-operations-to-reduce-x-to-zero"},
+        ],
+      },
+      {
+        topic: "Strings", color: "#FF8FAB", icon: "Aa",
+        programs: [
+          { name: "Reverse a string without built-in", hint: "Two pointer or char array swap" },
+          { name: "Check palindrome (ignore spaces/case)", hint: "Two pointer on cleaned string" },
+          { name: "Count vowels and consonants", hint: "Loop + set of vowels" },
+          { name: "Remove duplicate characters", hint: "LinkedHashSet preserves order" },
+          { name: "Check if one string is rotation of another", hint: "s2 in (s1+s1)" },
+          { name: "Count words in a sentence", hint: "Split on spaces, count tokens" },
+          { name: "Find all permutations of a string", hint: "Backtrack with swap" },
+        ],
+        extra: [
+          {name:"Palindrome Number",diff:"Easy",slug:"palindrome-number"},
+          {name:"Count and Say",diff:"Medium",slug:"count-and-say"},
+          {name:"Longest Palindromic Substring",diff:"Medium",slug:"longest-palindromic-substring"},
+          {name:"ZigZag Conversion",diff:"Medium",slug:"zigzag-conversion"},
+          {name:"Roman to Integer",diff:"Easy",slug:"roman-to-integer"},
+        ],
+      },
+      {
+        topic: "Recursion", color: "#87CEEB", icon: "↺",
+        programs: [
+          { name: "Factorial using recursion", hint: "n * fact(n-1), base: n==0" },
+          { name: "Fibonacci using recursion", hint: "fib(n-1)+fib(n-2), base: n<=1" },
+          { name: "Power(x, n) recursion", hint: "x * power(x, n-1)" },
+          { name: "Print 1 to N using recursion", hint: "Call then print, or print then call" },
+          { name: "Sum of digits recursively", hint: "n%10 + sum(n/10)" },
+          { name: "Binary search recursive", hint: "Pass low/high, recurse on half" },
+          { name: "Tower of Hanoi", hint: "Move n-1 to helper, move nth, move n-1 to dest" },
+        ],
+        extra: [
+          {name:"Reverse Linked List (Recursive)",diff:"Easy",slug:"reverse-linked-list"},
+          {name:"Merge Two Sorted Lists (Recursive)",diff:"Easy",slug:"merge-two-sorted-lists"},
+          {name:"Flatten Nested List Iterator",diff:"Medium",slug:"flatten-nested-list-iterator"},
+          {name:"Pow(x, n)",diff:"Medium",slug:"powx-n"},
+          {name:"Combination Sum",diff:"Medium",slug:"combination-sum"},
+        ],
+      },
+      {
+        topic: "Sorting", color: "#FFB347", icon: "⇅",
+        programs: [
+          { name: "Implement Bubble Sort", hint: "Nested loop, swap adjacent if out of order" },
+          { name: "Implement Selection Sort", hint: "Find min in rest, swap with current" },
+          { name: "Implement Insertion Sort", hint: "Insert current into sorted left portion" },
+          { name: "Implement Merge Sort", hint: "Divide, sort halves, merge" },
+          { name: "Count inversions in array", hint: "Modified merge sort counts during merge" },
+          { name: "Sort 0s, 1s, 2s (Dutch National Flag)", hint: "Three pointer: low/mid/high" },
+        ],
+        extra: [
+          {name:"Minimum Number of Swaps to Sort",diff:"Medium",slug:"minimum-number-of-swaps-to-sort"},
+          {name:"Sort Characters By Frequency",diff:"Medium",slug:"sort-characters-by-frequency"},
+          {name:"Wiggle Sort II",diff:"Medium",slug:"wiggle-sort-ii"},
+          {name:"Maximum Gap",diff:"Hard",slug:"maximum-gap"},
+          {name:"Count of Smaller Numbers After Self",diff:"Hard",slug:"count-of-smaller-numbers-after-self"},
+        ],
+      },
+      {
+        topic: "Binary Search", color: "#98D8C8", icon: "⌗",
+        programs: [
+          { name: "Classic binary search", hint: "mid = low+(high-low)/2" },
+          { name: "Find first and last occurrence", hint: "Two separate BS calls" },
+          { name: "Count occurrences of element", hint: "lastOccurrence - firstOccurrence + 1" },
+          { name: "Find floor and ceil of element", hint: "Track ans when arr[mid] <= target" },
+          { name: "Search in infinite sorted array", hint: "Double range until found, then BS" },
+        ],
+        extra: [
+          {name:"Find Smallest Letter Greater Than Target",diff:"Easy",slug:"find-smallest-letter-greater-than-target"},
+          {name:"Time Based Key-Value Store",diff:"Medium",slug:"time-based-key-value-store"},
+          {name:"Find in Mountain Array",diff:"Hard",slug:"find-in-mountain-array"},
+          {name:"Median of Two Sorted Arrays",diff:"Hard",slug:"median-of-two-sorted-arrays"},
+        ],
+      },
+      {
+        topic: "Linked List", color: "#C3B1E1", icon: "⇢",
+        programs: [
+          { name: "Create and traverse linked list", hint: "Node class + head pointer" },
+          { name: "Insert at beginning/end/middle", hint: "Update next pointers carefully" },
+          { name: "Delete a node by value", hint: "Find previous node, skip target" },
+          { name: "Reverse a linked list", hint: "prev/curr/next pointer dance" },
+          { name: "Find middle using slow/fast pointer", hint: "Fast moves 2x, slow 1x" },
+          { name: "Detect and remove cycle", hint: "Floyd detect, then find start" },
+        ],
+        extra: [
+          {name:"Palindrome Linked List",diff:"Easy",slug:"palindrome-linked-list"},
+          {name:"Add Two Numbers",diff:"Medium",slug:"add-two-numbers"},
+          {name:"Sort List",diff:"Medium",slug:"sort-list"},
+          {name:"Copy List with Random Pointer",diff:"Medium",slug:"copy-list-with-random-pointer"},
+          {name:"Flatten a Multilevel Doubly Linked List",diff:"Medium",slug:"flatten-a-multilevel-doubly-linked-list"},
+        ],
+      },
+      {
+        topic: "Stack & Queue", color: "#B5EAD7", icon: "⊟",
+        programs: [
+          { name: "Implement stack using array", hint: "top pointer, push/pop/peek" },
+          { name: "Implement queue using two stacks", hint: "Lazy transfer on dequeue" },
+          { name: "Check balanced parentheses", hint: "Push open, pop on close" },
+          { name: "Next greater element for each", hint: "Monotonic decreasing stack" },
+          { name: "Implement min stack", hint: "Two stacks: one for mins" },
+          { name: "Reverse a queue using stack", hint: "Push all to stack, pop back" },
+        ],
+        extra: [
+          {name:"Baseball Game",diff:"Easy",slug:"baseball-game"},
+          {name:"Asteroid Collision",diff:"Medium",slug:"asteroid-collision"},
+          {name:"132 Pattern",diff:"Medium",slug:"132-pattern"},
+          {name:"Largest Rectangle in Histogram",diff:"Hard",slug:"largest-rectangle-in-histogram"},
+          {name:"Trapping Rain Water",diff:"Hard",slug:"trapping-rain-water"},
+        ],
+      },
+      {
+        topic: "Greedy", color: "#FFDAC1", icon: "↯",
+        programs: [
+          { name: "Activity selection problem", hint: "Sort by end time, pick non-overlapping" },
+          { name: "Minimum coins for change", hint: "Greedy: pick largest coin <= amount" },
+          { name: "Fractional knapsack", hint: "Sort by value/weight ratio" },
+          { name: "Minimum platforms for trains", hint: "Sort arrivals/departures, sweep" },
+          { name: "Huffman encoding idea", hint: "Priority queue, merge two smallest" },
+        ],
+        extra: [
+          {name:"Boats to Save People",diff:"Medium",slug:"boats-to-save-people"},
+          {name:"Minimum Number of Platforms",diff:"Medium",slug:"minimum-number-of-platforms"},
+          {name:"Task Scheduler",diff:"Medium",slug:"task-scheduler"},
+          {name:"Reorganize String",diff:"Medium",slug:"reorganize-string"},
+        ],
+      },
+      {
+        topic: "Dynamic Programming", color: "#DDA0DD", icon: "◈",
+        programs: [
+          { name: "Fibonacci: recursion → memo → tabulation", hint: "Show all 3 approaches" },
+          { name: "0/1 Knapsack", hint: "dp[i][w] = max(skip, take) if w>=wt[i]" },
+          { name: "Longest Common Subsequence", hint: "2D table: match→diagonal+1, else max(up,left)" },
+          { name: "Coin change (min coins)", hint: "dp[i] = min over all coins c: dp[i-c]+1" },
+          { name: "Longest Increasing Subsequence", hint: "For each i, check all j<i where arr[j]<arr[i]" },
+          { name: "Matrix chain multiplication", hint: "Interval DP: try all split points k" },
+        ],
+        extra: [
+          {name:"Jump Game",diff:"Medium",slug:"jump-game"},
+          {name:"Decode Ways",diff:"Medium",slug:"decode-ways"},
+          {name:"Target Sum",diff:"Medium",slug:"target-sum"},
+          {name:"Palindromic Substrings",diff:"Medium",slug:"palindromic-substrings"},
+          {name:"Maximum Product Subarray",diff:"Medium",slug:"maximum-product-subarray"},
+          {name:"Burst Balloons",diff:"Hard",slug:"burst-balloons"},
+        ],
+      },
+      {
+        topic: "Trees", color: "#B5D5C5", icon: "⌥",
+        programs: [
+          { name: "Build a binary tree manually", hint: "Node class with left/right" },
+          { name: "Inorder / Preorder / Postorder DFS", hint: "Left-Root-Right / Root-L-R / L-R-Root" },
+          { name: "Find height of binary tree", hint: "1 + max(height(left), height(right))" },
+          { name: "Count nodes in binary tree", hint: "1 + countLeft + countRight" },
+          { name: "Check if two trees are identical", hint: "Compare root, recurse on children" },
+          { name: "BFS level order traversal", hint: "Queue: add root, loop add children" },
+          { name: "Insert into BST", hint: "Go left if smaller, right if larger" },
+        ],
+        extra: [
+          {name:"Sum of Left Leaves",diff:"Easy",slug:"sum-of-left-leaves"},
+          {name:"Path Sum II",diff:"Medium",slug:"path-sum-ii"},
+          {name:"Flatten Binary Tree to Linked List",diff:"Medium",slug:"flatten-binary-tree-to-linked-list"},
+          {name:"Binary Tree Maximum Path Sum",diff:"Hard",slug:"binary-tree-maximum-path-sum"},
+          {name:"Serialize and Deserialize Binary Tree",diff:"Hard",slug:"serialize-and-deserialize-binary-tree"},
+        ],
+      },
+    ];
+
+    const schedule = [
+      { time:"30 min", label:"Concept Learning", icon:"📖", desc:"Read theory, understand pattern" },
+      { time:"30 min", label:"Logic Building", icon:"🔧", desc:"Small programs, no LC pressure" },
+      { time:"1–2 hrs", label:"LeetCode Practice", icon:"💻", desc:"Solve problems from list" },
+      { time:"20 min", label:"Dry Run", icon:"✏️", desc:"Pen-paper trace through" },
+    ];
+
+    const diffColor = { Easy:"#4ECDC4", Medium:"#F7C948", Hard:"#FF6B35" };
+    const STORAGE_KEY = "dsa30_v2";
+
+    // ─────────────────────────────────────────────
+    //  APP
+    // ─────────────────────────────────────────────
+    function App() {
+      const [tab, setTab] = useState("plan"); // "plan" | "practice"
+      const [activeDay, setActiveDay] = useState(0);
+      const [activePrac, setActivePrac] = useState(0);
+      const [done, setDone] = useState(() => {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+        catch { return {}; }
+      });
+      const [search, setSearch] = useState("");
+
+      useEffect(() => {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(done)); } catch {}
+      }, [done]);
+
+      const toggle = (key) => setDone(prev => ({ ...prev, [key]: !prev[key] }));
+
+      const dayDone   = (i) => days[i].leetcode.filter((_,j) => done[`d${i}-${j}`]).length;
+      const pracDone  = (i) => {
+        const pt = practiceTopics[i];
+        const prog = pt.programs.filter((_,j) => done[`pp${i}-${j}`]).length;
+        const ex   = pt.extra.filter((_,j) => done[`pe${i}-${j}`]).length;
+        return prog + ex;
+      };
+      const pracTotal = (i) => practiceTopics[i].programs.length + practiceTopics[i].extra.length;
+
+      const totalLC   = days.reduce((a,d)=>a+d.leetcode.length,0);
+      const totalDone = days.reduce((a,_,i)=>a+dayDone(i),0);
+      const overallPct = Math.round((totalDone/totalLC)*100);
+
+      const phases = [...new Set(days.map(d=>d.phase))];
+      const d = days[activeDay];
+      const pt = practiceTopics[activePrac];
+
+      return (
+        <div style={{display:"flex",flexDirection:"column",height:"100vh",overflow:"hidden"}}>
+
+          {/* ── HEADER ── */}
+          <div style={{
+            borderBottom:"2px solid #1a1a1a", padding:"14px 24px",
+            display:"flex", alignItems:"center", justifyContent:"space-between",
+            flexWrap:"wrap", gap:"10px", background:"#090909", flexShrink:0,
+          }}>
+            <div>
+              <div style={{fontSize:"9px",letterSpacing:"4px",color:"#444"}}>30-DAY DSA BOOTCAMP</div>
+              <div style={{fontSize:"20px",fontWeight:"900",color:"#fff",letterSpacing:"-1px"}}>ARRAYS → TREES</div>
+            </div>
+
+            {/* TAB SWITCHER */}
+            <div style={{display:"flex",gap:"0"}}>
+              {["plan","practice"].map(t => (
+                <button key={t} onClick={()=>setTab(t)} style={{
+                  padding:"8px 20px", background: tab===t ? "#fff" : "transparent",
+                  border:"1px solid #2a2a2a", color: tab===t ? "#000" : "#555",
+                  cursor:"pointer", fontFamily:"inherit", fontSize:"11px",
+                  letterSpacing:"2px", fontWeight: tab===t ? "700" : "400",
+                  textTransform:"uppercase",
+                }}>
+                  {t==="plan" ? "📅 30-Day Plan" : "🔧 Practice"}
+                </button>
+              ))}
+            </div>
+
+            {/* Search + Progress */}
+            <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
+              <input placeholder="Search..." value={search} onChange={e=>setSearch(e.target.value)}
+                style={{
+                  background:"#111",border:"1px solid #2a2a2a",color:"#ccc",
+                  padding:"7px 12px",fontSize:"12px",fontFamily:"inherit",
+                  outline:"none",width:"180px",
+                }}
+              />
+              <div style={{textAlign:"right"}}>
+                <div style={{fontSize:"10px",color:"#555"}}>
+                  <span style={{color:"#fff",fontSize:"16px",fontWeight:"700"}}>{totalDone}</span>
+                  /{totalLC} LC
+                </div>
+                <div style={{width:"120px",height:"3px",background:"#1a1a1a",marginTop:"3px"}}>
+                  <div style={{height:"100%",width:`${overallPct}%`,background:"#FFD700",transition:"width 0.4s"}}/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── SEARCH OVERLAY ── */}
+          {search && (
+            <div style={{
+              position:"fixed",top:"70px",left:0,right:0,bottom:0,
+              background:"#0D0D0D",zIndex:100,overflowY:"auto",padding:"24px 32px",
+            }}>
+              <div style={{fontSize:"10px",letterSpacing:"3px",color:"#444",marginBottom:"16px"}}>
+                RESULTS FOR "{search.toUpperCase()}"
+              </div>
+              {days.filter(d=>
+                d.topic.toLowerCase().includes(search.toLowerCase()) ||
+                d.leetcode.some(l=>l.name.toLowerCase().includes(search.toLowerCase()))
+              ).map((fd,fi)=>(
+                <div key={fi} style={{marginBottom:"16px"}}>
+                  <div onClick={()=>{setActiveDay(days.indexOf(fd));setTab("plan");setSearch("");}}
+                    style={{fontSize:"12px",color:fd.color,cursor:"pointer",marginBottom:"6px",letterSpacing:"1px"}}>
+                    [PLAN] DAY {fd.day} — {fd.topic.toUpperCase()} →
+                  </div>
+                  {fd.leetcode.filter(l=>l.name.toLowerCase().includes(search.toLowerCase())).map((l,li)=>(
+                    <div key={li} style={{padding:"7px 12px",background:"#111",border:"1px solid #1e1e1e",marginBottom:"4px",fontSize:"12px",color:"#aaa",display:"flex",justifyContent:"space-between"}}>
+                      {l.name}<span style={{color:diffColor[l.diff],fontSize:"9px"}}>{l.diff}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              {practiceTopics.filter(pt=>
+                pt.topic.toLowerCase().includes(search.toLowerCase()) ||
+                pt.programs.some(p=>p.name.toLowerCase().includes(search.toLowerCase())) ||
+                pt.extra.some(e=>e.name.toLowerCase().includes(search.toLowerCase()))
+              ).map((fp,fi)=>(
+                <div key={"p"+fi} style={{marginBottom:"16px"}}>
+                  <div onClick={()=>{setActivePrac(practiceTopics.indexOf(fp));setTab("practice");setSearch("");}}
+                    style={{fontSize:"12px",color:fp.color,cursor:"pointer",marginBottom:"6px",letterSpacing:"1px"}}>
+                    [PRACTICE] {fp.topic.toUpperCase()} →
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div style={{display:"flex",flex:1,overflow:"hidden"}}>
+
+            {/* ── SIDEBAR ── */}
+            <div style={{width:"220px",minWidth:"220px",borderRight:"1px solid #141414",overflowY:"auto",background:"#090909"}}>
+              {tab === "plan" ? (
+                phases.map(phase=>{
+                  const phaseDays = days.filter(d=>d.phase===phase);
+                  return (
+                    <div key={phase}>
+                      <div style={{padding:"10px 14px 4px",fontSize:"8px",letterSpacing:"3px",color:"#2a2a2a",borderTop:"1px solid #141414"}}>
+                        {phase.toUpperCase()}
+                      </div>
+                      {phaseDays.map(pd=>{
+                        const idx=days.indexOf(pd);
+                        const pct=Math.round((dayDone(idx)/pd.leetcode.length)*100);
+                        const isA=activeDay===idx;
+                        return (
+                          <div key={pd.day} onClick={()=>setActiveDay(idx)} style={{
+                            padding:"9px 14px",cursor:"pointer",
+                            borderLeft: isA ? `3px solid ${pd.color}` : "3px solid transparent",
+                            background: isA ? "#131313" : "transparent",
+                          }}>
+                            <div style={{display:"flex",alignItems:"center",gap:"7px"}}>
+                              <span style={{color:pd.color,fontSize:"12px",width:"16px",textAlign:"center"}}>{pd.icon}</span>
+                              <div style={{flex:1,minWidth:0}}>
+                                <div style={{fontSize:"8px",color:"#2a2a2a"}}>DAY {pd.day}</div>
+                                <div style={{fontSize:"11px",color:isA?"#fff":"#555",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{pd.topic}</div>
+                                <div style={{marginTop:"3px",height:"2px",background:"#1a1a1a"}}>
+                                  <div style={{height:"100%",width:`${pct}%`,background:pct===100?"#4CAF50":pd.color,transition:"width 0.3s"}}/>
+                                </div>
+                              </div>
+                              {pct===100 && <span style={{color:"#4CAF50",fontSize:"11px"}}>✓</span>}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })
+              ) : (
+                <div>
+                  <div style={{padding:"10px 14px 4px",fontSize:"8px",letterSpacing:"3px",color:"#2a2a2a",borderTop:"1px solid #141414"}}>
+                    PRACTICE TOPICS
+                  </div>
+                  {practiceTopics.map((p,i)=>{
+                    const pct=Math.round((pracDone(i)/pracTotal(i))*100);
+                    const isA=activePrac===i;
+                    return (
+                      <div key={i} onClick={()=>setActivePrac(i)} style={{
+                        padding:"9px 14px",cursor:"pointer",
+                        borderLeft: isA ? `3px solid ${p.color}` : "3px solid transparent",
+                        background: isA ? "#131313" : "transparent",
+                      }}>
+                        <div style={{display:"flex",alignItems:"center",gap:"7px"}}>
+                          <span style={{color:p.color,fontSize:"12px",width:"16px",textAlign:"center"}}>{p.icon}</span>
+                          <div style={{flex:1,minWidth:0}}>
+                            <div style={{fontSize:"11px",color:isA?"#fff":"#555"}}>{p.topic}</div>
+                            <div style={{marginTop:"3px",height:"2px",background:"#1a1a1a"}}>
+                              <div style={{height:"100%",width:`${pct}%`,background:pct===100?"#4CAF50":p.color,transition:"width 0.3s"}}/>
+                            </div>
+                          </div>
+                          {pct===100 && <span style={{color:"#4CAF50",fontSize:"11px"}}>✓</span>}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* ── MAIN PANEL ── */}
+            <div style={{flex:1,overflowY:"auto",padding:"24px 28px"}}>
+
+              {/* ════ PLAN TAB ════ */}
+              {tab === "plan" && (
+                <>
+                  {/* Day Header */}
+                  <div style={{display:"flex",alignItems:"center",gap:"14px",marginBottom:"22px"}}>
+                    <div style={{width:"48px",height:"48px",border:`2px solid ${d.color}`,background:d.color+"15",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",color:d.color,fontWeight:"900"}}>
+                      {d.icon}
+                    </div>
+                    <div>
+                      <div style={{fontSize:"9px",color:"#444",letterSpacing:"3px"}}>DAY {d.day} OF 30 — {d.phase.toUpperCase()}</div>
+                      <div style={{fontSize:"20px",fontWeight:"900",color:"#fff",letterSpacing:"-0.5px"}}>{d.topic.toUpperCase()}</div>
+                    </div>
+                    <div style={{marginLeft:"auto",textAlign:"right"}}>
+                      <span style={{fontSize:"26px",fontWeight:"900",color:d.color}}>{dayDone(activeDay)}</span>
+                      <span style={{fontSize:"13px",color:"#333"}}>/{d.leetcode.length}</span>
+                      <div style={{fontSize:"8px",color:"#333",letterSpacing:"2px"}}>SOLVED</div>
+                    </div>
+                  </div>
+
+                  {/* Logic */}
+                  <div style={{marginBottom:"20px"}}>
+                    <div style={{fontSize:"8px",letterSpacing:"4px",color:"#333",marginBottom:"8px"}}>LOGIC BUILDING</div>
+                    <div style={{display:"flex",flexWrap:"wrap",gap:"7px"}}>
+                      {d.logic.map((l,i)=>(
+                        <div key={i} style={{padding:"6px 12px",border:`1px solid ${d.color}33`,background:d.color+"08",fontSize:"12px",color:d.color}}>→ {l}</div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* LC Problems */}
+                  <div style={{marginBottom:"24px"}}>
+                    <div style={{fontSize:"8px",letterSpacing:"4px",color:"#333",marginBottom:"8px"}}>LEETCODE PROBLEMS</div>
+                    <div style={{display:"flex",flexDirection:"column",gap:"5px"}}>
+                      {d.leetcode.map((lc,i)=>{
+                        const key=`d${activeDay}-${i}`;
+                        const isDone=done[key];
+                        return (
+                          <div key={i} style={{display:"flex",alignItems:"center",gap:"12px",padding:"11px 14px",background:isDone?"#0c150c":"#0f0f0f",border:`1px solid ${isDone?"#1c301c":"#181818"}`}}>
+                            <div onClick={()=>toggle(key)} style={{width:"16px",height:"16px",flexShrink:0,border:`2px solid ${isDone?"#4CAF50":"#2a2a2a"}`,background:isDone?"#4CAF50":"transparent",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontSize:"10px",color:"#fff"}}>
+                              {isDone?"✓":""}
+                            </div>
+                            <div style={{flex:1,fontSize:"13px",color:isDone?"#444":"#bbb",textDecoration:isDone?"line-through":"none"}}>{lc.name}</div>
+                            <span style={{fontSize:"8px",fontWeight:"700",color:diffColor[lc.diff],letterSpacing:"1px",minWidth:"44px",textAlign:"right"}}>{lc.diff.toUpperCase()}</span>
+                            <a href={`https://leetcode.com/problems/${lc.slug}/`} target="_blank" rel="noopener noreferrer"
+                              style={{fontSize:"9px",color:d.color,padding:"3px 9px",border:`1px solid ${d.color}33`,letterSpacing:"1px",whiteSpace:"nowrap"}}>
+                              OPEN →
+                            </a>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Daily Schedule */}
+                  <div style={{borderTop:"1px solid #141414",paddingTop:"20px",marginBottom:"20px"}}>
+                    <div style={{fontSize:"8px",letterSpacing:"4px",color:"#333",marginBottom:"12px"}}>DAILY SCHEDULE</div>
+                    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(150px,1fr))",gap:"8px"}}>
+                      {schedule.map((s,i)=>(
+                        <div key={i} style={{padding:"12px",background:"#0e0e0e",border:"1px solid #161616"}}>
+                          <div style={{fontSize:"16px",marginBottom:"5px"}}>{s.icon}</div>
+                          <div style={{fontSize:"10px",color:d.color,fontWeight:"700",marginBottom:"2px"}}>{s.time}</div>
+                          <div style={{fontSize:"11px",color:"#666"}}>{s.label}</div>
+                          <div style={{fontSize:"10px",color:"#2a2a2a",marginTop:"3px"}}>{s.desc}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Nav */}
+                  <div style={{display:"flex",gap:"8px"}}>
+                    {activeDay>0 && <button onClick={()=>setActiveDay(activeDay-1)} style={{padding:"9px 18px",background:"transparent",border:"1px solid #2a2a2a",color:"#555",cursor:"pointer",fontFamily:"inherit",fontSize:"10px",letterSpacing:"2px"}}>← DAY {activeDay}</button>}
+                    {activeDay<days.length-1 && <button onClick={()=>setActiveDay(activeDay+1)} style={{padding:"9px 18px",background:d.color+"18",border:`1px solid ${d.color}44`,color:d.color,cursor:"pointer",fontFamily:"inherit",fontSize:"10px",letterSpacing:"2px",marginLeft:"auto"}}>DAY {activeDay+2} →</button>}
+                  </div>
+                </>
+              )}
+
+              {/* ════ PRACTICE TAB ════ */}
+              {tab === "practice" && (
+                <>
+                  {/* Practice Header */}
+                  <div style={{display:"flex",alignItems:"center",gap:"14px",marginBottom:"22px"}}>
+                    <div style={{width:"48px",height:"48px",border:`2px solid ${pt.color}`,background:pt.color+"15",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",color:pt.color,fontWeight:"900"}}>
+                      {pt.icon}
+                    </div>
+                    <div>
+                      <div style={{fontSize:"9px",color:"#444",letterSpacing:"3px"}}>PRACTICE ZONE</div>
+                      <div style={{fontSize:"20px",fontWeight:"900",color:"#fff",letterSpacing:"-0.5px"}}>{pt.topic.toUpperCase()}</div>
+                    </div>
+                    <div style={{marginLeft:"auto",textAlign:"right"}}>
+                      <span style={{fontSize:"22px",fontWeight:"900",color:pt.color}}>{pracDone(activePrac)}</span>
+                      <span style={{fontSize:"12px",color:"#333"}}>/{pracTotal(activePrac)}</span>
+                      <div style={{fontSize:"8px",color:"#333",letterSpacing:"2px"}}>DONE</div>
+                    </div>
+                  </div>
+
+                  {/* Logic Programs */}
+                  <div style={{marginBottom:"24px"}}>
+                    <div style={{fontSize:"8px",letterSpacing:"4px",color:"#333",marginBottom:"10px"}}>
+                      🔧 LOGIC BUILDING — JAVA PROGRAMS
+                    </div>
+                    <div style={{display:"flex",flexDirection:"column",gap:"5px"}}>
+                      {pt.programs.map((p,i)=>{
+                        const key=`pp${activePrac}-${i}`;
+                        const isDone=done[key];
+                        return (
+                          <div key={i} onClick={()=>toggle(key)} style={{
+                            display:"flex",alignItems:"flex-start",gap:"12px",
+                            padding:"12px 14px",background:isDone?"#0c150c":"#0f0f0f",
+                            border:`1px solid ${isDone?"#1c301c":"#181818"}`,cursor:"pointer",
+                          }}>
+                            <div style={{width:"16px",height:"16px",flexShrink:0,marginTop:"1px",border:`2px solid ${isDone?"#4CAF50":"#2a2a2a"}`,background:isDone?"#4CAF50":"transparent",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",color:"#fff"}}>
+                              {isDone?"✓":""}
+                            </div>
+                            <div style={{flex:1}}>
+                              <div style={{fontSize:"13px",color:isDone?"#444":"#bbb",textDecoration:isDone?"line-through":"none"}}>{p.name}</div>
+                              <div style={{fontSize:"11px",color:"#3a3a3a",marginTop:"3px"}}>💡 {p.hint}</div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Extra LC */}
+                  <div>
+                    <div style={{fontSize:"8px",letterSpacing:"4px",color:"#333",marginBottom:"10px"}}>
+                      💻 EXTRA LEETCODE — PATTERN REINFORCEMENT
+                    </div>
+                    <div style={{display:"flex",flexDirection:"column",gap:"5px"}}>
+                      {pt.extra.map((lc,i)=>{
+                        const key=`pe${activePrac}-${i}`;
+                        const isDone=done[key];
+                        return (
+                          <div key={i} style={{display:"flex",alignItems:"center",gap:"12px",padding:"11px 14px",background:isDone?"#0c150c":"#0f0f0f",border:`1px solid ${isDone?"#1c301c":"#181818"}`}}>
+                            <div onClick={()=>toggle(key)} style={{width:"16px",height:"16px",flexShrink:0,border:`2px solid ${isDone?"#4CAF50":"#2a2a2a"}`,background:isDone?"#4CAF50":"transparent",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontSize:"10px",color:"#fff"}}>
+                              {isDone?"✓":""}
+                            </div>
+                            <div style={{flex:1,fontSize:"13px",color:isDone?"#444":"#bbb",textDecoration:isDone?"line-through":"none"}}>{lc.name}</div>
+                            <span style={{fontSize:"8px",fontWeight:"700",color:diffColor[lc.diff],letterSpacing:"1px",minWidth:"44px",textAlign:"right"}}>{lc.diff.toUpperCase()}</span>
+                            <a href={`https://leetcode.com/problems/${lc.slug}/`} target="_blank" rel="noopener noreferrer"
+                              style={{fontSize:"9px",color:pt.color,padding:"3px 9px",border:`1px solid ${pt.color}33`,letterSpacing:"1px",whiteSpace:"nowrap"}}>
+                              OPEN →
+                            </a>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
